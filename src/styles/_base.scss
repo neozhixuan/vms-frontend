@@ -32,3 +32,30 @@ code {
   font-size: $font-size-xl;
   font-weight: $font-weight-heavy;
 }
+
+.modal-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.9
+  ); /* Adjust the background color and opacity */
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Adjust the box shadow if needed */
+  z-index: 1000;
+}
+
+.blur-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  backdrop-filter: blur(8px); /* Adjust the blur value as needed */
+  z-index: 999;
+}

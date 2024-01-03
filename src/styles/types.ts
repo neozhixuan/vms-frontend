@@ -7,7 +7,7 @@ export type ParticipantType = {
   createdAt: string;
 };
 
-export type EventType = {
+export type EventsType = {
   id: number;
   title: string;
   description: string;

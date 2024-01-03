@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { EventType } from "../styles/types";
+import { EventsType } from "../styles/types";
 import { Link } from "react-router-dom";
 
 const Events = () => {
-  const [events, setEvents] = useState<EventType[]>([]);
+  const [events, setEvents] = useState<EventsType[]>([]);
 
   useEffect(() => {
     fetch("http://localhost:8080/getevents")

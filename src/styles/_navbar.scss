@@ -2,6 +2,8 @@
   color: map-get($COLORS, invertedText);
   font-weight: $font-weight-heavy;
   font-size: 1rem;
+  text-decoration: none;
+  margin-block: 1rem;
 }
 
 .navbar {
