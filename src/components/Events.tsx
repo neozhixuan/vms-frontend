@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { EventType } from "../styles/types";
+import { Link } from "react-router-dom";
 
 const Events = () => {
   const [events, setEvents] = useState<EventType[]>([]);
@@ -20,10 +21,12 @@ const Events = () => {
     <div className="container">
       <span className="header-text">Events</span>
       <div className="card-container">
-        {events.map((event, idx) => {
+        {events.map((event) => {
           return (
-            <div className="event-card" key={idx}>
-              <p className="event-title">{event.title}</p>
+            <div className="event-card" key={event.id}>
+              <Link to={`/event/${event.id}`} className="event-title">
+                {event.title}
+              </Link>
               <p className="event-description">{event.description}</p>
             </div>
           );

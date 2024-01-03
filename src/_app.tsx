@@ -1,12 +1,12 @@
 import React from "react";
 import Navbar from "./components/Navbar";
-import Events from "./components/Events";
+import { Outlet } from "react-router";
 
 function App() {
   return (
     <div className="App">
       <Navbar />
-      <Events />
+      <Outlet />
     </div>
   );
 }

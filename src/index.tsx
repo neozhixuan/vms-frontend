@@ -6,12 +6,14 @@ import { Provider } from "react-redux";
 import { createRoot } from "react-dom/client";
 import { store } from "./state/store";
 import "./styles/index.scss";
+import { RouterProvider } from "react-router";
+import { router } from "./routes/Routes";
 
 const root = createRoot(document.getElementById("root") as Element);
 
 root.render(
   <Provider store={store}>
-    <App />
+    <RouterProvider router={router} />
   </Provider>,
 );
 

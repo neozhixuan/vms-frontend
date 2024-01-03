@@ -9,6 +9,8 @@
     margin-top: 0;
     font-size: $font-size-lg;
     font-weight: $font-weight-heavy;
+    text-decoration: none;
+    color: map-get($COLORS, primaryText);
   }
 
   .event-description {
