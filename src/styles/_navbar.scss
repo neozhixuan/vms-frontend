@@ -1,0 +1,24 @@
+@mixin nav-text {
+  color: map-get($COLORS, invertedText);
+  font-weight: $font-weight-heavy;
+  font-size: 1rem;
+}
+
+.navbar {
+  width: 100%;
+  background-color: map-get($COLORS, header);
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  padding-block: $base-padding;
+  padding-inline: $padding-xl;
+  box-sizing: border-box;
+  .nav-start {
+    @include nav-text;
+    flex: 0%;
+  }
+
+  .nav-items {
+    @include nav-text;
+  }
+}

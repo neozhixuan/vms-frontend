@@ -1,6 +1,21 @@
 {
   "compilerOptions": {
-    "jsx": "react-jsx"
+    "target": "es2022", // Adjust based on browser compatibility needs
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true, // If using JavaScript files
+    "skipLibCheck": true, // Skip type checking of declaration files
+    "esModuleInterop": true, // Enables seamless use of CommonJS modules
+    "allowSyntheticDefaultImports": true, // Allow default imports from modules with no default export
+    "strict": true, // Enable all strict type-checking options
+    "forceConsistentCasingInFileNames": true, // Enforce consistent casing in file names
+    "module": "esnext", // Use ES modules
+    "moduleResolution": "node", // Resolve modules using Node.js-style resolution
+    "resolveJsonModule": true, // Enable importing JSON files as modules
+    "isolatedModules": true, // Treat each file as a separate module
+    "noEmit": true, // Don't emit compiled JavaScript files
+    "jsx": "react-jsx", // Use React JSX syntax
+    "types": ["react-dom/experimental"]
   },
-  "include": ["src/components", "src/custom.d.ts"]
+  "include": ["src"], // Include source files
+  "baseUrl": "src"
 }

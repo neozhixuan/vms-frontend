@@ -1,0 +1,23 @@
+.event-card {
+  display: block;
+  background-color: map-get($COLORS, bg3);
+  padding: $padding-lg;
+  margin-block: $base-margin;
+  border: $base-border-thickness solid map-get($COLORS, bg2);
+
+  .event-title {
+    margin-top: 0;
+    font-size: $font-size-lg;
+    font-weight: $font-weight-heavy;
+  }
+
+  .event-description {
+    margin-bottom: 0;
+    font-size: $base-font-size;
+    font-weight: $base-font-weight;
+  }
+}
+
+.card-container {
+  width: 100%;
+}

@@ -6,3 +6,10 @@ export type ParticipantType = {
   isBoss: boolean;
   createdAt: string;
 };
+
+export type EventType = {
+  id: number;
+  title: string;
+  description: string;
+};
+export type ChildrenProps = { children?: React.ReactNode };

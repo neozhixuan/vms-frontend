@@ -1,0 +1,38 @@
+$COLORS: (
+  bg: #fff,
+  bg2: #f8f9fa,
+  bg3: #f1f3f4,
+  primaryText: #37474f,
+  secondaryText: #5f6368,
+  invertedText: #fff,
+  header: #185abc,
+  button: #1a73e8,
+  buttonHover: #1765cc,
+);
+
+// font
+$base-font-size: 1rem;
+$font-size-sm: $base-font-size * 0.75;
+$font-size-lg: $base-font-size * 1.5;
+$font-size-xl: $base-font-size * 2;
+$font-size-xxl: $base-font-size * 3;
+
+$base-font-weight: 400;
+$font-weight-heavy: 700;
+$font-weight-black: 900;
+
+// padding margin
+$base-padding: 0.75rem;
+$padding-lg: $base-padding * 2;
+$padding-xl: $base-padding * 3;
+
+$base-margin: 0.75rem;
+$margin-lg: $base-margin * 2;
+$margin-xl: $base-margin * 3;
+
+// border
+$base-border-thickness: 1px;
+$base-border-radius: 20px;
+
+// shadow
+$base-box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.1);
