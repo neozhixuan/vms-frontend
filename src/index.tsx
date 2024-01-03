@@ -8,13 +8,17 @@ import { store } from "./state/store";
 import "./styles/index.scss";
 import { RouterProvider } from "react-router";
 import { router } from "./routes/Routes";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
+const queryClient = new QueryClient();
 const root = createRoot(document.getElementById("root") as Element);
 
 root.render(
-  <Provider store={store}>
-    <RouterProvider router={router} />
-  </Provider>,
+  <QueryClientProvider client={queryClient}>
+    <Provider store={store}>
+      <RouterProvider router={router} />
+    </Provider>
+  </QueryClientProvider>,
 );
 
 reportWebVitals(sendToVercelAnalytics);

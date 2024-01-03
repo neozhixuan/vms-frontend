@@ -2,12 +2,13 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Modal from "./Modal";
 // import { Portal, PortalTarget } from "./Portal.component";
+import { useQuery } from "@tanstack/react-query";
 
 type EventType = any;
 
 const EventPage = () => {
   const { id } = useParams();
-  const [event, setEvent] = useState<EventType>();
+  // const [event, setEvent] = useState<EventType>();
   const [isModalOpen, setModalState] = useState<boolean>(false);
   const toggleModal = () => setModalState(!isModalOpen);
   const [inputValue, setInputValue] = useState({
@@ -25,17 +26,28 @@ const EventPage = () => {
     });
   };
 
-  useEffect(() => {
-    fetch(`http://localhost:8080/getevent?id=${id}`)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        return response.json();
-      })
-      .then((data) => setEvent(data))
-      .catch((e) => console.error(e));
-  }, []);
+  const fetchEvent = async () => {
+    try {
+      const response = await fetch(`http://localhost:8080/getevent?id=${id}`);
+      console.log("hi");
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      return response.json();
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  };
+
+  const { data: event, isLoading } = useQuery({
+    queryFn: () => fetchEvent(),
+    queryKey: ["event"],
+    staleTime: 10000,
+  });
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
   return event ? (
     <div>

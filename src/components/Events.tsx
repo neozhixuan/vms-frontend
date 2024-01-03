@@ -1,27 +1,37 @@
 import React, { useEffect, useState } from "react";
 import { EventsType } from "../styles/types";
 import { Link } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
 
 const Events = () => {
-  const [events, setEvents] = useState<EventsType[]>([]);
+  const fetchEvents = async () => {
+    try {
+      const response = await fetch("http://localhost:8080/getevents");
+      console.log("hi");
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      return response.json();
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  };
 
-  useEffect(() => {
-    fetch("http://localhost:8080/getevents")
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        return response.json();
-      })
-      .then((data) => setEvents(data))
-      .catch((e) => console.error(e));
-  }, []);
+  const { data: events, isLoading } = useQuery({
+    queryFn: () => fetchEvents(),
+    queryKey: ["events"],
+    staleTime: 1000,
+  });
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className="container">
       <span className="header-text">Events</span>
       <div className="card-container">
-        {events.map((event) => {
+        {events.map((event: any) => {
           return (
             <div className="event-card" key={event.id}>
               <Link to={`/event/${event.id}`} className="event-title">
