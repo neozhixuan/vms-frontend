@@ -22,7 +22,7 @@ const EventPage = () => {
     const { id, value } = e.target;
     setInputValue({
       ...inputValue,
-      [id]: new Date(value),
+      [id]: value,
     });
   };
 
