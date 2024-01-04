@@ -23,3 +23,47 @@
 .card-container {
   width: 100%;
 }
+
+.event-creator {
+  padding-inline: $base-padding;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-weight: $font-weight-heavy;
+  margin-bottom: $margin-lg;
+}
+
+.event-desc-card {
+  padding: $padding-lg;
+  display: flex;
+  flex-direction: column;
+  gap: $base-margin;
+  background-color: map-get($COLORS, bg2);
+  margin-bottom: $margin-lg;
+
+  &-title {
+    font-weight: $font-weight-heavy;
+  }
+
+  .event-blocks {
+    display: flex;
+    flex-direction: column;
+    gap: $base-margin;
+    .event-shift {
+      color: map-get($COLORS, primaryText);
+      .event-signup {
+        margin-left: $base-margin;
+      }
+    }
+  }
+  .event-availability {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.shift-input {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+}

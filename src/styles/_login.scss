@@ -1,0 +1,36 @@
+@mixin form-group {
+  display: flex;
+  flex-direction: column;
+  gap: $base-margin;
+  font-size: $base-font-size;
+  font-weight: $font-weight-heavy;
+}
+
+@mixin form-input {
+  margin-top: 5px;
+  padding: $base-padding;
+}
+.login-form {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  gap: $margin-lg;
+  .field-group {
+    @include form-group();
+    .field-input {
+      @include form-input();
+    }
+  }
+}
+
+.post-form {
+  display: flex;
+  flex-direction: column;
+  gap: $margin-lg;
+  .field-group {
+    @include form-group();
+    .field-input {
+      @include form-input();
+    }
+  }
+}

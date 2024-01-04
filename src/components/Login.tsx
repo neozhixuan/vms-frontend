@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { AppDispatch, RootState } from "../state/store";
 import { BossType, login } from "../state/authentication";
+import { CustomButton } from "../styles/utils";
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
@@ -55,7 +56,7 @@ const Login = () => {
       .then((result) => {
         if (result && result.fullname) {
           dispatch(login(result as BossType)); // Dispatch the login action
-          navigate("/bosspage");
+          navigate(`/boss/${result.id}`);
         }
       })
       .catch((error) => {
@@ -64,30 +65,37 @@ const Login = () => {
   };
 
   return (
-    <form onSubmit={handleOnSubmit}>
-      <label htmlFor="email">
-        Email
-        <input
-          id="email"
-          placeholder="Enter NTU email"
-          type="text"
-          value={email}
-          onChange={handleOnChange}
-        />
-      </label>
-      <br />
+    <div className='container'>
+      <p className='header-text'>Login</p>
+      <form className='login-form' onSubmit={handleOnSubmit}>
+        <div className='field-group'>
+          <label htmlFor='email'>Email </label>
 
-      <label htmlFor="passw"> Password </label>
-      <input
-        id="passw"
-        placeholder="Enter password"
-        type="password"
-        value={passw}
-        onChange={handleOnChange}
-      />
-      <br />
-      <button type="submit">Submit</button>
-    </form>
+          <input
+            className='field-input'
+            id='email'
+            placeholder='Enter NTU email'
+            type='text'
+            value={email}
+            onChange={handleOnChange}
+          />
+        </div>
+
+        <div className='field-group'>
+          <label htmlFor='passw'> Password </label>
+          <input
+            className='field-input'
+            id='passw'
+            placeholder='Enter password'
+            type='password'
+            value={passw}
+            onChange={handleOnChange}
+          />
+          <br />
+        </div>
+        <CustomButton type='submit'>Submit</CustomButton>
+      </form>
+    </div>
   );
 };
 

@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { EventsType } from "../styles/types";
+import React from "react";
 import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 
@@ -28,16 +27,16 @@ const Events = () => {
   }
 
   return (
-    <div className="container">
-      <span className="header-text">Events</span>
-      <div className="card-container">
+    <div className='container'>
+      <span className='header-text'>Events</span>
+      <div className='card-container'>
         {events.map((event: any) => {
           return (
-            <div className="event-card" key={event.id}>
-              <Link to={`/event/${event.id}`} className="event-title">
+            <div className='event-card' key={event.id}>
+              <Link to={`/event/${event.id}`} className='event-title'>
                 {event.title}
               </Link>
-              <p className="event-description">{event.description}</p>
+              <p className='event-description'>{event.description}</p>
             </div>
           );
         })}
