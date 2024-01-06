@@ -1,4 +1,4 @@
-const backendURL = "localhost:8080";
+const backendURL = "http://localhost:8080";
 
 export const fetchBossEvent = async (boss_id: number) => {
   try {
