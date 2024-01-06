@@ -1,5 +1,4 @@
-const backendURL =
-  "http://abdcc31461cff4e118526a860c4bebfd-1991586140.us-east-1.elb.amazonaws.com:8080";
+const backendURL = "localhost:8080";
 
 export const fetchBossEvent = async (boss_id: number) => {
   try {
