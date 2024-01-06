@@ -7,7 +7,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import Modal from "./Modal";
 import { Link } from "react-router-dom";
 import { CustomButton } from "../styles/utils";
-
+import { handlePostSubmit } from "../services/fetchServices";
 const BossPage = () => {
   const { id } = useParams();
   const auth = useSelector((state: RootState) => state.auth);
@@ -91,28 +91,6 @@ const BossPage = () => {
         console.error(error);
       });
     toggleModal();
-  };
-
-  const handlePostSubmit = async (requestBody: string) => {
-    try {
-      const response = await fetch("http://localhost:8080/addevent", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: requestBody,
-      });
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-
-      const result = await response.json();
-      return result;
-    } catch (error) {
-      console.error("Error:", error);
-      return null;
-    }
   };
 
   const { mutateAsync: eventMutation } = useMutation({

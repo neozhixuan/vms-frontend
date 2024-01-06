@@ -6,6 +6,12 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useSelector } from "react-redux";
 import { RootState } from "../state/store";
 import { CustomButton } from "../styles/utils";
+import {
+  addParticipant,
+  checkParticipant,
+  fetchEvent,
+  handleSignUp,
+} from "../services/fetchServices";
 
 const EventPage = () => {
   const queryClient = useQueryClient();
@@ -30,52 +36,11 @@ const EventPage = () => {
     }));
   };
 
-  const fetchEvent = async () => {
-    try {
-      const response = await fetch(`http://localhost:8080/getevent?id=${id}`);
-      console.log("hi");
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-      return response.json();
-    } catch (error) {
-      console.error(error);
-      throw error;
-    }
-  };
-
   const { data: event, isLoading } = useQuery({
-    queryFn: () => fetchEvent(),
+    queryFn: () => fetchEvent(parseInt(id ? id : "0")),
     queryKey: ["event"],
     staleTime: 10000,
   });
-
-  const handleSignUp = async (requestBody: {
-    is_allocated: boolean;
-    participant_id: number;
-    event_id: number;
-    shift_id: number;
-  }) => {
-    try {
-      const response = await fetch("http://localhost:8080/addavailability", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(requestBody),
-      });
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-
-      const result = await response.json();
-      return result;
-    } catch (error) {
-      console.error("Error:", error);
-      return null;
-    }
-  };
 
   const { mutateAsync: signUpMutation } = useMutation({
     mutationFn: handleSignUp,
@@ -92,17 +57,7 @@ const EventPage = () => {
     try {
       let account: any = null;
 
-      const isParticipant = await fetch(
-        "http://localhost:8080/is_participant",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(inputValue),
-        },
-      );
-
+      const isParticipant = await checkParticipant(inputValue);
       if (!isParticipant.ok) {
         throw new Error(`HTTP error! Status: ${isParticipant.status}`);
       }
@@ -117,17 +72,8 @@ const EventPage = () => {
           isBoss: false,
           createdAt: new Date().toString(),
         };
-        console.log(participantRequest);
-        const participantResponse = await fetch(
-          "http://localhost:8080/addparticipant",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(participantRequest),
-          },
-        );
+
+        const participantResponse = await addParticipant(participantRequest);
 
         if (!participantResponse.ok) {
           throw new Error(`HTTP error! Status: ${participantResponse.status}`);

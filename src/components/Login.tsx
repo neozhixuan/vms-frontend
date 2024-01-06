@@ -1,10 +1,12 @@
 import { useMutation } from "@tanstack/react-query";
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { AppDispatch, RootState } from "../state/store";
+import { AppDispatch } from "../state/store";
 import { BossType, login } from "../state/authentication";
 import { CustomButton } from "../styles/utils";
+import { handleLogin } from "../services/fetchServices";
+
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
@@ -23,28 +25,6 @@ const Login = () => {
     });
   };
 
-  const handleLogin = async () => {
-    try {
-      const response = await fetch("http://localhost:8080/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(inputValue),
-      });
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-
-      const result = await response.json();
-      return result;
-    } catch (error) {
-      console.error("Error:", error);
-      return null;
-    }
-  };
-
   const { mutateAsync: loginMutation } = useMutation({
     mutationFn: handleLogin,
   });
@@ -52,7 +32,7 @@ const Login = () => {
   const handleOnSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log(inputValue);
-    loginMutation()
+    loginMutation(inputValue)
       .then((result) => {
         if (result && result.fullname) {
           dispatch(login(result as BossType)); // Dispatch the login action
