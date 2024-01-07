@@ -13,7 +13,7 @@ const Events = () => {
     return <div>Loading...</div>;
   }
 
-  return (
+  return events ? (
     <div className='container'>
       <span className='header-text'>Events</span>
       <div className='card-container'>
@@ -29,6 +29,8 @@ const Events = () => {
         })}
       </div>
     </div>
+  ) : (
+    <div className='container'>No events at the moment.</div>
   );
 };
 

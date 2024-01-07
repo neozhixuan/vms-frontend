@@ -9,9 +9,9 @@ import {
 
 const backendURL = "http://localhost:8080";
 
-export const fetchBossEvent: (boss_id: number) => Promise<EventsType> = async (
+export const fetchBossEvent: (
   boss_id: number,
-) => {
+) => Promise<EventsType[]> = async (boss_id: number) => {
   try {
     const response = await fetch(
       `${backendURL}/getbossevent?boss_id=${boss_id}`,
@@ -67,7 +67,7 @@ export const fetchEvent: (id: number) => Promise<EventsType> = async (
   }
 };
 
-export const fetchEvents: () => Promise<EventsType> = async () => {
+export const fetchEvents: () => Promise<EventsType[]> = async () => {
   try {
     const response = await fetch(`${backendURL}/getevents`);
     console.log("hi");

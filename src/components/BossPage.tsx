@@ -103,101 +103,105 @@ const BossPage = () => {
     },
   });
 
-  return isLoading ? (
-    <div>Loading...</div>
-  ) : auth.id !== -1 ? (
-    <div className='container'>
-      <div>
-        <p className='header-text'>{auth.fullname}</p>
-        <div className='boss-details'>
-          <span>
-            <b>Company:</b> {auth.company}
-          </span>
-          <span>
-            <b>Email:</b> {auth.email}
-          </span>
-          <span>
-            <b>Birthday:</b> {auth.birthday}
-          </span>
+  return bossEvent ? (
+    isLoading ? (
+      <div>Loading...</div>
+    ) : auth.id !== -1 ? (
+      <div className='container'>
+        <div>
+          <p className='header-text'>{auth.fullname}</p>
+          <div className='boss-details'>
+            <span>
+              <b>Company:</b> {auth.company}
+            </span>
+            <span>
+              <b>Email:</b> {auth.email}
+            </span>
+            <span>
+              <b>Birthday:</b> {auth.birthday}
+            </span>
+          </div>
         </div>
-      </div>
-      <hr />
-      <div>
-        <h2>My events:</h2>
-        {bossEvent.map((event: any) => (
-          <div className='event-card' key={event.id}>
-            <Link to={`/event/${event.id}`} className='event-title'>
-              {event.id}: {event.title}
-            </Link>
-            <p className='event-description'>{event.description}</p>
-          </div>
-        ))}
-        <CustomButton onClick={toggleModal}>Create Event</CustomButton>
-      </div>
-      <Modal isOpen={isModalOpen} handleClose={toggleModal}>
-        <form className='post-form'>
-          <div className='field-group'>
-            {" "}
-            <label htmlFor='title'>Title</label>
-            <input
-              className='field-input'
-              id='title'
-              placeholder='Enter title'
-              type='text'
-              value={title}
-              onChange={handleOnChange}
-            />
-          </div>
-          <div className='field-group'>
-            <label htmlFor='description'>Description </label>
-            <input
-              className='field-input'
-              id='description'
-              placeholder='Enter description'
-              type='description'
-              value={description}
-              onChange={handleOnChange}
-            />
-          </div>
-          <div className='field-group'>
-            <label htmlFor='shift'>Shifts (start, end)</label>
-            {shifts.map((shift, idx) => (
-              <div className='shift-input' id='shift' key={idx}>
-                <input
-                  className='field-input'
-                  id='start_time'
-                  aria-label='Date and time'
-                  type='datetime-local'
-                  onChange={(e) => handleShiftOnChange(e, idx)}
-                />
-                <input
-                  className='field-input'
-                  id='end_time'
-                  aria-label='Date and time'
-                  type='datetime-local'
-                  onChange={(e) => handleShiftOnChange(e, idx)}
-                />
-                {idx === 0 ? (
-                  <button className='field-input' onClick={addShift}>
-                    +
-                  </button>
-                ) : (
-                  <button
+        <hr />
+        <div>
+          <h2>My events:</h2>
+          {bossEvent.map((event: any) => (
+            <div className='event-card' key={event.id}>
+              <Link to={`/event/${event.id}`} className='event-title'>
+                {event.id}: {event.title}
+              </Link>
+              <p className='event-description'>{event.description}</p>
+            </div>
+          ))}
+          <CustomButton onClick={toggleModal}>Create Event</CustomButton>
+        </div>
+        <Modal isOpen={isModalOpen} handleClose={toggleModal}>
+          <form className='post-form'>
+            <div className='field-group'>
+              {" "}
+              <label htmlFor='title'>Title</label>
+              <input
+                className='field-input'
+                id='title'
+                placeholder='Enter title'
+                type='text'
+                value={title}
+                onChange={handleOnChange}
+              />
+            </div>
+            <div className='field-group'>
+              <label htmlFor='description'>Description </label>
+              <input
+                className='field-input'
+                id='description'
+                placeholder='Enter description'
+                type='description'
+                value={description}
+                onChange={handleOnChange}
+              />
+            </div>
+            <div className='field-group'>
+              <label htmlFor='shift'>Shifts (start, end)</label>
+              {shifts.map((shift, idx) => (
+                <div className='shift-input' id='shift' key={idx}>
+                  <input
                     className='field-input'
-                    onClick={(e) => cancelShift(e, idx)}
-                  >
-                    -
-                  </button>
-                )}
-              </div>
-            ))}
-          </div>
-          <CustomButton onClick={handleSubmit}>Submit</CustomButton>
-        </form>
-      </Modal>
-    </div>
+                    id='start_time'
+                    aria-label='Date and time'
+                    type='datetime-local'
+                    onChange={(e) => handleShiftOnChange(e, idx)}
+                  />
+                  <input
+                    className='field-input'
+                    id='end_time'
+                    aria-label='Date and time'
+                    type='datetime-local'
+                    onChange={(e) => handleShiftOnChange(e, idx)}
+                  />
+                  {idx === 0 ? (
+                    <button className='field-input' onClick={addShift}>
+                      +
+                    </button>
+                  ) : (
+                    <button
+                      className='field-input'
+                      onClick={(e) => cancelShift(e, idx)}
+                    >
+                      -
+                    </button>
+                  )}
+                </div>
+              ))}
+            </div>
+            <CustomButton onClick={handleSubmit}>Submit</CustomButton>
+          </form>
+        </Modal>
+      </div>
+    ) : (
+      <div>No access granted</div>
+    )
   ) : (
-    <div>No access granted</div>
+    <div>Boss not found</div>
   );
 };
 
