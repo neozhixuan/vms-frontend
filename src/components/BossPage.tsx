@@ -8,6 +8,7 @@ import Modal from "./Modal";
 import { Link } from "react-router-dom";
 import { CustomButton } from "../styles/utils";
 import { handlePostSubmit } from "../services/fetchServices";
+import { EventsType } from "../styles/types";
 const BossPage = () => {
   const { id } = useParams();
   const auth = useSelector((state: RootState) => state.auth);
@@ -125,7 +126,7 @@ const BossPage = () => {
         <hr />
         <div>
           <h2>My events:</h2>
-          {bossEvent.map((event: any) => (
+          {bossEvent.map((event: EventsType) => (
             <div className='event-card' key={event.id}>
               <Link to={`/event/${event.id}`} className='event-title'>
                 {event.id}: {event.title}

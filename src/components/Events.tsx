@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { fetchEvents } from "../services/fetchServices";
+import { EventsType } from "../styles/types";
 
 const Events = () => {
   const { data: events, isLoading } = useQuery({
@@ -17,7 +18,7 @@ const Events = () => {
     <div className='container'>
       <span className='header-text'>Events</span>
       <div className='card-container'>
-        {events.map((event: any) => {
+        {events.map((event: EventsType) => {
           return (
             <div className='event-card' key={event.id}>
               <Link to={`/event/${event.id}`} className='event-title'>

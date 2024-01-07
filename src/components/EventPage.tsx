@@ -12,7 +12,12 @@ import {
   fetchEvent,
   handleSignUp,
 } from "../services/fetchServices";
-import { ParticipantRequest, ParticipantType } from "../styles/types";
+import {
+  AvailabilityType,
+  ParticipantRequest,
+  ParticipantType,
+  ShiftType,
+} from "../styles/types";
 
 const EventPage = () => {
   const queryClient = useQueryClient();
@@ -121,7 +126,7 @@ const EventPage = () => {
           <span className='event-desc-card-title'>Help needed during:</span>
 
           <div className='event-blocks'>
-            {event.shifts.map((shift: any, idx: number) => {
+            {event.shifts.map((shift: ShiftType, idx: number) => {
               return (
                 <div key={shift.id} className='event-shift'>
                   <span>Slot {idx + 1}:</span>
@@ -149,7 +154,7 @@ const EventPage = () => {
           <span className='event-desc-card-title'>Current Sign ups:</span>
           <div className='event-blocks'>
             {event.availabilities.length > 0 ? (
-              event.availabilities.map((availability: any) => {
+              event.availabilities.map((availability: AvailabilityType) => {
                 return (
                   <div
                     className='event-availability'
