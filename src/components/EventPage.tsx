@@ -12,6 +12,7 @@ import {
   fetchEvent,
   handleSignUp,
 } from "../services/fetchServices";
+import { ParticipantRequest, ParticipantType } from "../styles/types";
 
 const EventPage = () => {
   const queryClient = useQueryClient();
@@ -55,7 +56,7 @@ const EventPage = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      let account: any = null;
+      let account: ParticipantType | null = null;
 
       const isParticipant = await checkParticipant(inputValue);
       if (!isParticipant.ok) {
@@ -65,7 +66,7 @@ const EventPage = () => {
       account = await isParticipant.json();
       console.log(account);
       if (!account) {
-        const participantRequest = {
+        const participantRequest: ParticipantRequest = {
           fullname: "",
           email: inputValue.email,
           passw: inputValue.passw,
@@ -81,17 +82,18 @@ const EventPage = () => {
 
         account = await participantResponse.json();
       }
-      console.log(account);
-      const signUpRequest = {
-        is_allocated: false,
-        participant_id: account.id,
-        event_id: parseInt(id ? id : "-1"),
-        shift_id: focusedShift,
-      };
-      console.log(signUpRequest);
-      const result = await signUpMutation(signUpRequest);
-      console.log(result);
-      toggleModal();
+      if (account !== null) {
+        const signUpRequest = {
+          is_allocated: false,
+          participant_id: account.id,
+          event_id: parseInt(id ? id : "-1"),
+          shift_id: focusedShift,
+        };
+        console.log(signUpRequest);
+        const result = await signUpMutation(signUpRequest);
+        console.log(result);
+        toggleModal();
+      }
     } catch (error) {
       console.error("Error:", error);
     }

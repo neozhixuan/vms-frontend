@@ -1,6 +1,17 @@
+import {
+  AvailabilityType,
+  EventsType,
+  LoginType,
+  ParticipantRequest,
+  ParticipantSignupType,
+  ParticipantType,
+} from "../styles/types";
+
 const backendURL = "http://localhost:8080";
 
-export const fetchBossEvent = async (boss_id: number) => {
+export const fetchBossEvent: (boss_id: number) => Promise<EventsType> = async (
+  boss_id: number,
+) => {
   try {
     const response = await fetch(
       `${backendURL}/getbossevent?boss_id=${boss_id}`,
@@ -16,7 +27,9 @@ export const fetchBossEvent = async (boss_id: number) => {
   }
 };
 
-export const handlePostSubmit = async (requestBody: string) => {
+export const handlePostSubmit: (
+  requestBody: string,
+) => Promise<EventsType> = async (requestBody: string) => {
   try {
     const response = await fetch(`${backendURL}/addevent`, {
       method: "POST",
@@ -38,7 +51,9 @@ export const handlePostSubmit = async (requestBody: string) => {
   }
 };
 
-export const fetchEvent = async (id: number) => {
+export const fetchEvent: (id: number) => Promise<EventsType> = async (
+  id: number,
+) => {
   try {
     const response = await fetch(`${backendURL}/getevent?id=${id}`);
     console.log("hi");
@@ -52,7 +67,7 @@ export const fetchEvent = async (id: number) => {
   }
 };
 
-export const fetchEvents = async () => {
+export const fetchEvents: () => Promise<EventsType> = async () => {
   try {
     const response = await fetch(`${backendURL}/getevents`);
     console.log("hi");
@@ -66,7 +81,9 @@ export const fetchEvents = async () => {
   }
 };
 
-export const handleLogin = async (inVal: any) => {
+export const handleLogin: (
+  inVal: LoginType,
+) => Promise<ParticipantType> = async (inVal: LoginType) => {
   try {
     const response = await fetch(`${backendURL}/login`, {
       method: "POST",
@@ -88,12 +105,9 @@ export const handleLogin = async (inVal: any) => {
   }
 };
 
-export const handleSignUp = async (requestBody: {
-  is_allocated: boolean;
-  participant_id: number;
-  event_id: number;
-  shift_id: number;
-}) => {
+export const handleSignUp: (
+  requestBody: ParticipantSignupType,
+) => Promise<AvailabilityType> = async (requestBody: ParticipantSignupType) => {
   try {
     const response = await fetch(`${backendURL}/addavailability`, {
       method: "POST",
@@ -115,7 +129,9 @@ export const handleSignUp = async (requestBody: {
   }
 };
 
-export const checkParticipant = async (inVal: any) => {
+export const checkParticipant: (inVal: LoginType) => Promise<Response> = async (
+  inVal: LoginType,
+) => {
   const isParticipant = await fetch(`${backendURL}/is_participant`, {
     method: "POST",
     headers: {
@@ -126,7 +142,9 @@ export const checkParticipant = async (inVal: any) => {
   return isParticipant;
 };
 
-export const addParticipant = async (participantRequest: any) => {
+export const addParticipant: (
+  participantRequest: ParticipantRequest,
+) => Promise<Response> = async (participantRequest: ParticipantRequest) => {
   const participantResponse = await fetch(`${backendURL}/addparticipant`, {
     method: "POST",
     headers: {
