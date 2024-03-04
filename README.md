@@ -2,6 +2,8 @@
 
 This is a simple system made for easily creating events for users to join without signing up for accounts, and for mass collection of emails for maintenance.
 
+[![VMS](https://img.youtube.com/vi/W0LSD6SmZfE/0.jpg)](https://www.youtube.com/watch?v=W0LSD6SmZfE)
+
 ## Tech Stack
 
 This was created with React Typescript, and uses various technologies:
